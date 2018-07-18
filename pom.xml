@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.3.RELEASE</version>
+    </parent>
+    <groupId>net.df</groupId>
+    <artifactId>df-root</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <developers>
+        <developer>
+            <name>wangxc</name>
+            <email>wxc252@hotmail.com</email>
+            <organization></organization>
+            <organizationUrl></organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://github.com/bestwxc/df-root.git</url>
+    </scm>
+    <modules>
+        <module>df-base</module>
+        <module>df-boot-base</module>
+        <module>df-boot-web</module>
+        <module>df-boot-mybatis</module>
+        <module>df-boot-datasouce</module>
+        <module>df-cloud</module>
+    </modules>
+    <properties>
+        <compile.source>1.8</compile.source>
+        <compile.target>1.8</compile.target>
+        <compile.encoding>UTF-8</compile.encoding>
+
+        <!-- SpringBoot、SpringCloud、常用的类库版本控制 -->
+        <!--<spring-boot.version>2.0.3.RELEASE</spring-boot.version>-->
+        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
+
+        <!-- oracle jdbc 数据库驱动 -->
+        <ojdbc5.version>11.2.0.4</ojdbc5.version>
+        <ojdbc6.version>11.2.0.4</ojdbc6.version>
+        <ojdbc8.version>12.2.0.1</ojdbc8.version>
+
+        <!-- druid连接池版本 -->
+        <druid.version>1.1.10</druid.version>
+
+        <!-- mybatis相关版本 -->
+        <mybatis-spring-boot-starter.version>1.3.2</mybatis-spring-boot-starter.version>
+        <pagehelper-starter.version>1.2.5</pagehelper-starter.version>
+        <mapper-starter.version>2.0.3</mapper-starter.version>
+        <mapper.version>4.0.3</mapper.version>
+        <mybatis-generator-maven-plugin.version>1.3.6</mybatis-generator-maven-plugin.version>
+
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <!--<dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.oracle.jdbc</groupId>
+                <artifactId>ojdbc5</artifactId>
+                <version>${ojdbc5.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.oracle.jdbc</groupId>
+                <artifactId>ojdbc6</artifactId>
+                <version>${ojdbc6.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.oracle.jdbc</groupId>
+                <artifactId>ojdbc8</artifactId>
+                <version>${ojdbc8.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis-spring-boot-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-starter.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.mybatis.spring.boot</groupId>
+                        <artifactId>mybatis-spring-boot-starter</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>${mapper-starter.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>${compile.source}</source>
+                        <target>${compile.target}</target>
+                        <encoding>${compile.encoding}</encoding>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.mybatis.generator</groupId>
+                    <artifactId>mybatis-generator-maven-plugin</artifactId>
+                    <version>${mybatis-generator-maven-plugin.version}</version>
+                    <configuration>
+                        <configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
+                        <overwrite>true</overwrite>
+                        <verbose>true</verbose>
+                    </configuration>
+                    <dependencies>
+                        <dependency>
+                            <groupId>mysql</groupId>
+                            <artifactId>mysql-connector-java</artifactId>
+                        </dependency>
+                        <dependency>
+                            <groupId>tk.mybatis</groupId>
+                            <artifactId>mapper</artifactId>
+                            <version>${mapper.version}</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.oracle.jdbc</groupId>
+                            <artifactId>ojdbc6</artifactId>
+                            <version>${ojdbc6.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+</project>
