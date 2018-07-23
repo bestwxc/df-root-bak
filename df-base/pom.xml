@@ -11,9 +11,6 @@
 
     <artifactId>df-base</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>df-cloud</module>
-    </modules>
     <dependencies>
         <dependency>
             <groupId>commons-codec</groupId>
