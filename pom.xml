@@ -32,12 +32,12 @@
         <module>df-cloud</module>
     </modules>
     <properties>
+        <!-- maven编译插件配置 -->
         <compile.source>1.8</compile.source>
         <compile.target>1.8</compile.target>
         <compile.encoding>UTF-8</compile.encoding>
-
         <!-- SpringBoot、SpringCloud、常用的类库版本控制 -->
-        <!--<spring-boot.version>2.0.3.RELEASE</spring-boot.version>-->
+        <spring-boot.version>${parent.version}</spring-boot.version>
         <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
 
         <!-- oracle jdbc 数据库驱动 -->
@@ -58,13 +58,6 @@
     </properties>
     <dependencyManagement>
         <dependencies>
-            <!--<dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>-->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -72,7 +65,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <dependency>
                 <groupId>com.oracle.jdbc</groupId>
                 <artifactId>ojdbc5</artifactId>
@@ -88,13 +80,11 @@
                 <artifactId>ojdbc8</artifactId>
                 <version>${ojdbc8.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
